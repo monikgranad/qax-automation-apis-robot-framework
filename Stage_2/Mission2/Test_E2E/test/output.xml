@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.6 on win32)" generated="2025-10-11T08:50:37.716507" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Automation" source="C:\Users\admin\Documents\QAXpert\APIS\stage2\Mission2\Test_E2E\test\Test_Automation.robot">
+<test id="s1-t1" name="Crear usuario exitosamente" line="14">
+<kw name="Given el usuario crea un nuevo usuario" owner="createUser">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:38.542393" level="INFO">&amp;{headers} = { Authorization=Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d }</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:38.540987" elapsed="0.001562"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:38.543780" level="INFO">&amp;{body} = { name=Itzel Linares | gender=female | email=itzelyn47@gmail.com | status=active }</msg>
+<var>&amp;{body}</var>
+<arg>name=Itzel Linares</arg>
+<arg>gender=female</arg>
+<arg>email=itzelyn47@gmail.com</arg>
+<arg>status=active</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:38.543030" elapsed="0.000859"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-11T08:50:40.743425" level="INFO">POST Request : url=https://gorest.co.in/public/v2/users 
+ path_url=/public/v2/users 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d', 'Content-Length': '97', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Itzel Linares", "gender": "female", "email": "itzelyn47@gmail.com", "status": "active"}' 
+ </msg>
+<msg time="2025-10-11T08:50:40.744672" level="INFO">POST Response : url=https://gorest.co.in/public/v2/users 
+ status=201, reason=Created 
+ headers={'Date': 'Sat, 11 Oct 2025 14:50:40 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '103', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'etag': 'W/"822644c42016d1a1c44eae951387040a"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'self'", 'location': 'https://gorest.co.in/public/v2/users/8181236', 'referrer-policy': 'strict-origin-when-cross-origin', 'vary': 'Origin', 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-frame-options': 'SAMEORIGIN', 'x-permitted-cross-domain-policies': 'none', 'x-ratelimit-limit': '90', 'x-ratelimit-remaining': '89', 'x-ratelimit-reset': '1', 'x-request-id': 'a57ce9c5-5930-4b15-82ac-f79724d75091', 'x-runtime': '0.052363', 'x-xss-protection': '0', 'cf-cache-status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=pgUgu%2B4L7UybyOXwxFH85fkuv57KeSYpZjUHp5eBwyGBei0GpV3lNeoCiEiG8BEk1IY6p1ozY8%2F3z4luPdEiYXqKC6ZisTbyxI4%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': '98cf2bcb3a0d7dce-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":8181236,"name":"Itzel Linares","email":"itzelyn47@gmail.com","gender":"female","status":"active"} 
+ </msg>
+<msg time="2025-10-11T08:50:40.745033" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/public/v2/users</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=201</arg>
+<arg>msg=Mensaje= El usuario ya existe</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-10-11T08:50:38.544260" elapsed="2.200838"/>
+</kw>
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.746220" level="INFO">201</msg>
+<arg>${response.status_code}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.745392" elapsed="0.000937"/>
+</kw>
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.748495" level="INFO">{'id': 8181236, 'name': 'Itzel Linares', 'email': 'itzelyn47@gmail.com', 'gender': 'female', 'status': 'active'}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.746543" elapsed="0.002160"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.750820" level="INFO">${code} = 201</msg>
+<var>${code}</var>
+<arg>${response.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.749169" elapsed="0.001761"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.752145" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<arg>${response}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.751361" elapsed="0.000964"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.753362" level="INFO">${code} = 201</msg>
+<arg>${code}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.752732" elapsed="0.000795"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:38.538802" elapsed="2.214940"/>
+</kw>
+<kw name="When la API responde el userId" owner="createUser">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.755998" level="INFO">${user} = {'id': 8181236, 'name': 'Itzel Linares', 'email': 'itzelyn47@gmail.com', 'gender': 'female', 'status': 'active'}</msg>
+<var>${user}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.754997" elapsed="0.001070"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-11T08:50:40.756715" level="INFO">${userid} = 8181236</msg>
+<var>${userid}</var>
+<arg>${user}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.756375" elapsed="0.000403"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.757217" level="INFO">El id del usuario creado es: 8181236</msg>
+<arg>El id del usuario creado es: ${userid}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.756973" elapsed="0.000346"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.757844" level="INFO">${userid} = 8181236</msg>
+<arg>${userid}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.757523" elapsed="0.000396"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${user}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.758089" elapsed="0.000274"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${user}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.758566" elapsed="0.000284"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${user}</arg>
+<arg>gender</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.759139" elapsed="0.000358"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${user}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.759731" elapsed="0.000274"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${user}</arg>
+<arg>status</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.760215" elapsed="0.001371"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:40.754494" elapsed="0.007287"/>
+</kw>
+<kw name="Then el Codigo de respuesta es 201 para el userId" owner="createUser">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.764080" level="INFO">201</msg>
+<arg>${code}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.763725" elapsed="0.000494"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.764978" level="INFO">${result} = 201</msg>
+<var>${result}</var>
+<arg>${code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.764538" elapsed="0.000498"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${result}</arg>
+<arg>201</arg>
+<arg>msg: No se creo usuario</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.765269" elapsed="0.000404"/>
+</kw>
+<kw name="se crea un post asociado a ese usuario" owner="createUser">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.767146" level="INFO">&amp;{headers} = { Authorization=Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d }</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.766512" elapsed="0.000750"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:40.769454" level="INFO">${body} = {'user_id': 8181236, 'title': 'Mi primer post automatizado', 'body': 'Contenido de prueba generado por la automatización.'}</msg>
+<var>${body}</var>
+<arg>user_id=${userid}</arg>
+<arg>title=Mi primer post automatizado</arg>
+<arg>body=Contenido de prueba generado por la automatización.</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.767669" elapsed="0.001955"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-11T08:50:43.229970" level="INFO">POST Request : url=https://gorest.co.in/public/v2/users/8181236/posts 
+ path_url=/public/v2/users/8181236/posts 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d', 'Content-Length': '128', 'Content-Type': 'application/json'} 
+ body=b'{"user_id": 8181236, "title": "Mi primer post automatizado", "body": "Contenido de prueba generado por la automatizaci\\u00f3n."}' 
+ </msg>
+<msg time="2025-10-11T08:50:43.230171" level="INFO">POST Response : url=https://gorest.co.in/public/v2/users/8181236/posts 
+ status=201, reason=Created 
+ headers={'Date': 'Sat, 11 Oct 2025 14:50:42 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '131', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'etag': 'W/"e17663429b31818edff28655d17fd7dd"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'self'", 'location': 'https://gorest.co.in/public/v2/posts/250465', 'referrer-policy': 'strict-origin-when-cross-origin', 'vary': 'Origin', 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-frame-options': 'SAMEORIGIN', 'x-permitted-cross-domain-policies': 'none', 'x-ratelimit-limit': '90', 'x-ratelimit-remaining': '89', 'x-ratelimit-reset': '1', 'x-request-id': '2dd03201-791b-437c-bc57-af8449364281', 'x-runtime': '0.049953', 'x-xss-protection': '0', 'cf-cache-status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=U%2BxbHEsYXTFXcykjKo3crN7dAefCK6LicYQXo1iwcwYA4Ro7Bj0uPbUunBSnHTaeYycLkEhM9xCu6bT9xSSkzbtj1x4vP4Zb3J1QFA%3D%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': '98cf2bdaaaf3485d-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":250465,"user_id":8181236,"title":"Mi primer post automatizado","body":"Contenido de prueba generado por la automatización."} 
+ </msg>
+<msg time="2025-10-11T08:50:43.230428" level="INFO">${response_post} = &lt;Response [201]&gt;</msg>
+<var>${response_post}</var>
+<arg>${BASE_URL}/public/v2/users/${userid}/posts</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-10-11T08:50:40.770025" elapsed="2.460460"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.231724" level="INFO">201</msg>
+<arg>${response_post.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.230758" elapsed="0.001063"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.233008" level="INFO">{'id': 250465, 'user_id': 8181236, 'title': 'Mi primer post automatizado', 'body': 'Contenido de prueba generado por la automatización.'}</msg>
+<arg>${response_post.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.232039" elapsed="0.001069"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.234290" level="INFO">${code_post} = 201</msg>
+<var>${code_post}</var>
+<arg>${response_post.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.233323" elapsed="0.001029"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.235016" level="INFO">${response_post} = &lt;Response [201]&gt;</msg>
+<arg>${response_post}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.234575" elapsed="0.000524"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.235713" level="INFO">${code_post} = 201</msg>
+<arg>${code_post}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.235303" elapsed="0.000488"/>
+</kw>
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.236901" level="INFO">{'id': 250465, 'user_id': 8181236, 'title': 'Mi primer post automatizado', 'body': 'Contenido de prueba generado por la automatización.'}</msg>
+<arg>${response_post.json()}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.235992" elapsed="0.001006"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:40.766037" elapsed="2.471082"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:40.762805" elapsed="2.474407"/>
+</kw>
+<kw name="And se crea un post asociado a ese usuario" owner="createUser">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.238640" level="INFO">&amp;{headers} = { Authorization=Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d }</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.238217" elapsed="0.000479"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:43.239590" level="INFO">${body} = {'user_id': 8181236, 'title': 'Mi primer post automatizado', 'body': 'Contenido de prueba generado por la automatización.'}</msg>
+<var>${body}</var>
+<arg>user_id=${userid}</arg>
+<arg>title=Mi primer post automatizado</arg>
+<arg>body=Contenido de prueba generado por la automatización.</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.238989" elapsed="0.000663"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-11T08:50:44.716019" level="INFO">POST Request : url=https://gorest.co.in/public/v2/users/8181236/posts 
+ path_url=/public/v2/users/8181236/posts 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d', 'Content-Length': '128', 'Content-Type': 'application/json'} 
+ body=b'{"user_id": 8181236, "title": "Mi primer post automatizado", "body": "Contenido de prueba generado por la automatizaci\\u00f3n."}' 
+ </msg>
+<msg time="2025-10-11T08:50:44.716184" level="INFO">POST Response : url=https://gorest.co.in/public/v2/users/8181236/posts 
+ status=201, reason=Created 
+ headers={'Date': 'Sat, 11 Oct 2025 14:50:44 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '131', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'etag': 'W/"a7f6ffb312b0df229fa6895f5c2daff9"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'self'", 'location': 'https://gorest.co.in/public/v2/posts/250466', 'referrer-policy': 'strict-origin-when-cross-origin', 'vary': 'Origin', 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-frame-options': 'SAMEORIGIN', 'x-permitted-cross-domain-policies': 'none', 'x-ratelimit-limit': '90', 'x-ratelimit-remaining': '89', 'x-ratelimit-reset': '1', 'x-request-id': '30658618-d908-4ad6-93e1-d45648f2a892', 'x-runtime': '0.052018', 'x-xss-protection': '0', 'cf-cache-status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=IWSoakcDmuxEiQ8K9xwpXHmIEsgCKA3IuymvoXsZGUohNVr%2FOf0gYI54gzUizoNgHIpjSbmhDzbp%2BCs37dXagD%2BzLI1Ao%2BhvvtbCow%3D%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': '98cf2be709cda571-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":250466,"user_id":8181236,"title":"Mi primer post automatizado","body":"Contenido de prueba generado por la automatización."} 
+ </msg>
+<msg time="2025-10-11T08:50:44.716406" level="INFO">${response_post} = &lt;Response [201]&gt;</msg>
+<var>${response_post}</var>
+<arg>${BASE_URL}/public/v2/users/${userid}/posts</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-10-11T08:50:43.240055" elapsed="1.476401"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.717437" level="INFO">201</msg>
+<arg>${response_post.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.716701" elapsed="0.000820"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.718407" level="INFO">{'id': 250466, 'user_id': 8181236, 'title': 'Mi primer post automatizado', 'body': 'Contenido de prueba generado por la automatización.'}</msg>
+<arg>${response_post.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.717699" elapsed="0.000798"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.719711" level="INFO">${code_post} = 201</msg>
+<var>${code_post}</var>
+<arg>${response_post.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.718679" elapsed="0.001092"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.720421" level="INFO">${response_post} = &lt;Response [201]&gt;</msg>
+<arg>${response_post}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.720003" elapsed="0.000503"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.721086" level="INFO">${code_post} = 201</msg>
+<arg>${code_post}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.720714" elapsed="0.000499"/>
+</kw>
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.722624" level="INFO">{'id': 250466, 'user_id': 8181236, 'title': 'Mi primer post automatizado', 'body': 'Contenido de prueba generado por la automatización.'}</msg>
+<arg>${response_post.json()}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.721503" elapsed="0.001270"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:43.237808" elapsed="1.485117"/>
+</kw>
+<kw name="When la API responde el postId" owner="createUser">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.725785" level="INFO">${post} = {'id': 250466, 'user_id': 8181236, 'title': 'Mi primer post automatizado', 'body': 'Contenido de prueba generado por la automatización.'}</msg>
+<var>${post}</var>
+<arg>${response_post.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.724303" elapsed="0.001574"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-11T08:50:44.726653" level="INFO">${postid} = 250466</msg>
+<var>${postid}</var>
+<arg>${post}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.726196" elapsed="0.000551"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.727388" level="INFO">El id del post creado es: 250466</msg>
+<arg>El id del post creado es: ${postid}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.727057" elapsed="0.000466"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.728817" level="INFO">${postid} = 250466</msg>
+<arg>${postid}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.728048" elapsed="0.000947"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${post}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.729346" elapsed="0.000508"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${post}</arg>
+<arg>user_id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.730204" elapsed="0.000476"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${post}</arg>
+<arg>title</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.731043" elapsed="0.000718"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${post}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.732234" elapsed="0.000595"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:44.723650" elapsed="0.009404"/>
+</kw>
+<kw name="Then el Codigo de respuesta es 201 para el postId" owner="createUser">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.736408" level="INFO">201</msg>
+<arg>${code_post}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.736107" elapsed="0.000424"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.737294" level="INFO">${result} = 201</msg>
+<var>${result}</var>
+<arg>${code_post}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.736817" elapsed="0.000553"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${result}</arg>
+<arg>201</arg>
+<arg>msg: No se creo post al usuario</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.737666" elapsed="0.000517"/>
+</kw>
+<kw name="se crea un comentario asociado a esa publicación" owner="createUser">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.740078" level="INFO">&amp;{headers} = { Authorization=Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d }</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.739370" elapsed="0.000797"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:44.741118" level="INFO">${body} = {'post': ' 250466', 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<var>${body}</var>
+<arg>post= ${postid}</arg>
+<arg>name=Ninja2</arg>
+<arg>email=ninja@example.com</arg>
+<arg>body=Este es un comentario de prueba</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.740471" elapsed="0.000734"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-11T08:50:46.150571" level="INFO">POST Request : url=https://gorest.co.in/public/v2/posts/250466/comments 
+ path_url=/public/v2/posts/250466/comments 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d', 'Content-Length': '110', 'Content-Type': 'application/json'} 
+ body=b'{"post": " 250466", "name": "Ninja2", "email": "ninja@example.com", "body": "Este es un comentario de prueba"}' 
+ </msg>
+<msg time="2025-10-11T08:50:46.150755" level="INFO">POST Response : url=https://gorest.co.in/public/v2/posts/250466/comments 
+ status=201, reason=Created 
+ headers={'Date': 'Sat, 11 Oct 2025 14:50:45 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '115', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'etag': 'W/"cec525be0d3ecdde577574f721a9cbe9"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'self'", 'location': 'https://gorest.co.in/public/v2/comments/171058', 'referrer-policy': 'strict-origin-when-cross-origin', 'vary': 'Origin', 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-frame-options': 'SAMEORIGIN', 'x-permitted-cross-domain-policies': 'none', 'x-ratelimit-limit': '90', 'x-ratelimit-remaining': '89', 'x-ratelimit-reset': '1', 'x-request-id': 'c217d13a-9c3f-470a-9af2-7184b53adefd', 'x-runtime': '0.032650', 'x-xss-protection': '0', 'cf-cache-status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AtyZWyt9DqlRMyHwHM4EU4uydk9Jh1z%2BArcwwhpholRh2xaPRh7XJ6ENCTrY4V0v8Z5AoVOQywOxJluOvP1GXykC%2Fmzo5X6koXVrSQ%3D%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': '98cf2bf038706731-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":171058,"post_id":250466,"name":"Ninja2","email":"ninja@example.com","body":"Este es un comentario de prueba"} 
+ </msg>
+<msg time="2025-10-11T08:50:46.151183" level="INFO">${response_comment} = &lt;Response [201]&gt;</msg>
+<var>${response_comment}</var>
+<arg>${BASE_URL}/public/v2/posts/${postid}/comments</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-10-11T08:50:44.741508" elapsed="1.409797"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.152614" level="INFO">201</msg>
+<arg>${response_comment.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.151776" elapsed="0.000931"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.153636" level="INFO">{'id': 171058, 'post_id': 250466, 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<arg>${response_comment.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.152904" elapsed="0.000817"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.154623" level="INFO">${code_comment} = 201</msg>
+<var>${code_comment}</var>
+<arg>${response_comment.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.153906" elapsed="0.000768"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.155204" level="INFO">${response_comment} = &lt;Response [201]&gt;</msg>
+<arg>${response_comment}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.154861" elapsed="0.000418"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.155753" level="INFO">${code_comment} = 201</msg>
+<arg>${code_comment}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.155446" elapsed="0.000377"/>
+</kw>
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.156659" level="INFO">{'id': 171058, 'post_id': 250466, 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<arg>${response_comment.json()}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.155994" elapsed="0.000751"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:44.738764" elapsed="1.418088"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:44.735441" elapsed="1.421491"/>
+</kw>
+<kw name="And se crea un comentario asociado a esa publicación" owner="createUser">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.158790" level="INFO">&amp;{headers} = { Authorization=Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d }</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.158019" elapsed="0.000846"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-11T08:50:46.159868" level="INFO">${body} = {'post': ' 250466', 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<var>${body}</var>
+<arg>post= ${postid}</arg>
+<arg>name=Ninja2</arg>
+<arg>email=ninja@example.com</arg>
+<arg>body=Este es un comentario de prueba</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.159258" elapsed="0.000669"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-11T08:50:47.786502" level="INFO">POST Request : url=https://gorest.co.in/public/v2/posts/250466/comments 
+ path_url=/public/v2/posts/250466/comments 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d', 'Content-Length': '110', 'Content-Type': 'application/json'} 
+ body=b'{"post": " 250466", "name": "Ninja2", "email": "ninja@example.com", "body": "Este es un comentario de prueba"}' 
+ </msg>
+<msg time="2025-10-11T08:50:47.787063" level="INFO">POST Response : url=https://gorest.co.in/public/v2/posts/250466/comments 
+ status=201, reason=Created 
+ headers={'Date': 'Sat, 11 Oct 2025 14:50:47 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '115', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'etag': 'W/"3fe3e01b63d3e120087cca4599e7708b"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'self'", 'location': 'https://gorest.co.in/public/v2/comments/171059', 'referrer-policy': 'strict-origin-when-cross-origin', 'vary': 'Origin', 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-frame-options': 'SAMEORIGIN', 'x-permitted-cross-domain-policies': 'none', 'x-ratelimit-limit': '90', 'x-ratelimit-remaining': '89', 'x-ratelimit-reset': '1', 'x-request-id': 'eefe9ab5-fc13-43f3-acd1-712fac2e76e7', 'x-runtime': '0.055941', 'x-xss-protection': '0', 'cf-cache-status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=isSYRJNeEIwugU7jRYbuIUlLassg6KAj%2BtYG50iOriDExDZnoLMxvN%2FIUp8k1Di3yqmYwDHOCf7L2gpzWtVVa1FzbbA6bFBIdOKh%2FQ%3D%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': '98cf2bfa18872cc6-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":171059,"post_id":250466,"name":"Ninja2","email":"ninja@example.com","body":"Este es un comentario de prueba"} 
+ </msg>
+<msg time="2025-10-11T08:50:47.788629" level="INFO">${response_comment} = &lt;Response [201]&gt;</msg>
+<var>${response_comment}</var>
+<arg>${BASE_URL}/public/v2/posts/${postid}/comments</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-10-11T08:50:46.160182" elapsed="1.628627"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.791631" level="INFO">201</msg>
+<arg>${response_comment.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.789603" elapsed="0.002269"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.794389" level="INFO">{'id': 171059, 'post_id': 250466, 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<arg>${response_comment.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.792433" elapsed="0.002152"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.796451" level="INFO">${code_comment} = 201</msg>
+<var>${code_comment}</var>
+<arg>${response_comment.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.794976" elapsed="0.001558"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.797391" level="INFO">${response_comment} = &lt;Response [201]&gt;</msg>
+<arg>${response_comment}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.796866" elapsed="0.000643"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.798319" level="INFO">${code_comment} = 201</msg>
+<arg>${code_comment}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.797819" elapsed="0.000617"/>
+</kw>
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.800257" level="INFO">{'id': 171059, 'post_id': 250466, 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<arg>${response_comment.json()}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.798785" elapsed="0.001655"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:46.157533" elapsed="1.643133"/>
+</kw>
+<kw name="When la API responde el commentId" owner="createUser">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.811898" level="INFO">${comment} = {'id': 171059, 'post_id': 250466, 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<var>${comment}</var>
+<arg>${response_comment.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.809754" elapsed="0.002284"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-11T08:50:47.813563" level="INFO">${commentid} = 171059</msg>
+<var>${commentid}</var>
+<arg>${comment}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.812526" elapsed="0.001160"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.814787" level="INFO">El id del comment creado es: 171059</msg>
+<arg>El id del comment creado es: ${commentid}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.814069" elapsed="0.000932"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.816267" level="INFO">${commentid} = 171059</msg>
+<arg>${commentid}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.815414" elapsed="0.001085"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.816934" elapsed="0.000724"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.818132" elapsed="0.010868"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.829566" elapsed="0.000616"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.831407" elapsed="0.000625"/>
+</kw>
+<kw name="se muestra mensaje: Se creó usuario, post y comment exitosamente" owner="createUser">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.834167" level="INFO">Se creó usuario: 8181236, post: 250466 y comment: 171059 exitosamente!!!</msg>
+<arg>Se creó usuario: ${userid}, post: ${postid} y comment: ${commentid} exitosamente!!!</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.833491" elapsed="0.000859"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.835070" level="INFO">Se creó usuario, post y comment exitosamente!!!</msg>
+<arg>Se creó usuario, post y comment exitosamente!!!</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.834767" elapsed="0.000473"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:47.832638" elapsed="0.002833"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:47.808761" elapsed="0.026890"/>
+</kw>
+<kw name="Then el Codigo de respuesta es 201 para el commentId" owner="createUser">
+<kw name="Log Many" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.837753" level="INFO">201</msg>
+<arg>${code_comment}</arg>
+<doc>Logs the given messages as separate entries using the INFO level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.837302" elapsed="0.000615"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.838883" level="INFO">${result} = 201</msg>
+<var>${result}</var>
+<arg>${code_comment}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.838267" elapsed="0.000714"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${result}</arg>
+<arg>201</arg>
+<arg>msg: No se creo comment para el post del usuario</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.839371" elapsed="0.000635"/>
+</kw>
+<kw name="se muestra mensaje: Se creó usuario, post y comment exitosamente" owner="createUser">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.841598" level="INFO">Se creó usuario: 8181236, post: 250466 y comment: 171059 exitosamente!!!</msg>
+<arg>Se creó usuario: ${userid}, post: ${postid} y comment: ${commentid} exitosamente!!!</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.841110" elapsed="0.000636"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.842309" level="INFO">Se creó usuario, post y comment exitosamente!!!</msg>
+<arg>Se creó usuario, post y comment exitosamente!!!</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.842054" elapsed="0.000378"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:47.840425" elapsed="0.002178"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:47.836416" elapsed="0.006330"/>
+</kw>
+<kw name="And se muestra mensaje: Se creó usuario, post y comment exitosamente" owner="createUser">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.847333" level="INFO">Se creó usuario: 8181236, post: 250466 y comment: 171059 exitosamente!!!</msg>
+<arg>Se creó usuario: ${userid}, post: ${postid} y comment: ${commentid} exitosamente!!!</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.845414" elapsed="0.002133"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-11T08:50:47.848410" level="INFO">Se creó usuario, post y comment exitosamente!!!</msg>
+<arg>Se creó usuario, post y comment exitosamente!!!</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-11T08:50:47.848028" elapsed="0.000556"/>
+</kw>
+<status status="PASS" start="2025-10-11T08:50:47.844459" elapsed="0.004351"/>
+</kw>
+<doc>Se crea un usuario nuevo,si es exitoso se crea un post asociado a ese usuario; si es exitoso, se crea un comment asociado a ese post; de lo contrario, muestra mensaje que no se creo usuario, post o comment</doc>
+<status status="PASS" start="2025-10-11T08:50:38.534562" elapsed="9.315242"/>
+</test>
+<status status="PASS" start="2025-10-11T08:50:37.730899" elapsed="10.123819"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Automation" id="s1" pass="1" fail="0" skip="0">Test Automation</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

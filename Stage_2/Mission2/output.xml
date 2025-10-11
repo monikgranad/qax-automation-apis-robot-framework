@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.6 on win32)" generated="2025-10-08T12:50:20.899214" rpa="false" schemaversion="5">
+<suite id="s1" name="Crear Comentarios" source="C:\Users\admin\Documents\QAXpert\APIS\stage2\Mission2\crear_comentarios.robot">
+<test id="s1-t1" name="Crear un comentario a un post de un usuario exitosamente" line="14">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-08T12:50:21.897141" level="INFO">&amp;{headers} = { Authorization=Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d }</msg>
+<var>&amp;{headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-08T12:50:21.893434" elapsed="0.004223"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-08T12:50:21.901412" level="INFO">${body} = {'post': ' 8172151', 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<var>${body}</var>
+<arg>post= ${POST}</arg>
+<arg>name=Ninja2</arg>
+<arg>email=ninja@example.com</arg>
+<arg>body=Este es un comentario de prueba</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-08T12:50:21.899372" elapsed="0.002304"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-08T12:50:25.688253" level="INFO">POST Request : url=https://gorest.co.in/public/v2/posts/249203/comments 
+ path_url=/public/v2/posts/249203/comments 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer 6d2f35d6345bedf64c8baadb077d551e84aa47aa1326ad1a9e42c46a2db5737d', 'Content-Length': '111', 'Content-Type': 'application/json'} 
+ body=b'{"post": " 8172151", "name": "Ninja2", "email": "ninja@example.com", "body": "Este es un comentario de prueba"}' 
+ </msg>
+<msg time="2025-10-08T12:50:25.688793" level="INFO">POST Response : url=https://gorest.co.in/public/v2/posts/249203/comments 
+ status=201, reason=Created 
+ headers={'Date': 'Wed, 08 Oct 2025 18:50:25 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '115', 'Connection': 'keep-alive', 'Cache-Control': 'max-age=0, private, must-revalidate', 'etag': 'W/"969de308a76c42d2cd2ecdaff71a1f76"', 'feature-policy': "camera 'none'; gyroscope 'none'; microphone 'none'; usb 'none'; fullscreen 'self'", 'location': 'https://gorest.co.in/public/v2/comments/170490', 'referrer-policy': 'strict-origin-when-cross-origin', 'vary': 'Origin', 'x-content-type-options': 'nosniff', 'x-download-options': 'noopen', 'x-frame-options': 'SAMEORIGIN', 'x-permitted-cross-domain-policies': 'none', 'x-ratelimit-limit': '90', 'x-ratelimit-remaining': '89', 'x-ratelimit-reset': '1', 'x-request-id': '24091beb-62ed-426b-bc75-dfbd1e1c153b', 'x-runtime': '0.054691', 'x-xss-protection': '0', 'cf-cache-status': 'DYNAMIC', 'Nel': '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}', 'Report-To': '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AS0ZWaEVcHgeFuqCLWFI2WwPThZ%2BJ8Yu9Tyikxxm4rby4mWbnkSoUM3u82TphQjqWOf%2FFPVp3oo4IpDIWYBhAOvmcNvb0Wp69Cv1dw%3D%3D"}]}', 'Server': 'cloudflare', 'CF-RAY': '98b7d2e2a8ab20d4-ORD', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={"id":170490,"post_id":249203,"name":"Ninja2","email":"ninja@example.com","body":"Este es un comentario de prueba"} 
+ </msg>
+<msg time="2025-10-08T12:50:25.689297" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/public/v2/posts/${POST_ID}/comments</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-10-08T12:50:21.903023" elapsed="3.786398"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-08T12:50:25.692804" level="INFO">201</msg>
+<arg>${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-08T12:50:25.690491" elapsed="0.002535"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-08T12:50:25.697047" level="INFO">{'id': 170490, 'post_id': 249203, 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-08T12:50:25.694025" elapsed="0.003286"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-08T12:50:25.700876" level="INFO">${comment} = {'id': 170490, 'post_id': 249203, 'name': 'Ninja2', 'email': 'ninja@example.com', 'body': 'Este es un comentario de prueba'}</msg>
+<var>${comment}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-08T12:50:25.698205" elapsed="0.002811"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-08T12:50:25.702233" elapsed="0.001105"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-08T12:50:25.704538" elapsed="0.001072"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-08T12:50:25.706552" elapsed="0.000651"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${comment}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-08T12:50:25.708776" elapsed="0.000994"/>
+</kw>
+<doc>Verifica que un POST a /public/v2/users/8172151/posts cree un recurso y devuelva 201 con datos correctos</doc>
+<status status="PASS" start="2025-10-08T12:50:21.884449" elapsed="3.827391"/>
+</test>
+<status status="PASS" start="2025-10-08T12:50:20.913491" elapsed="4.802478"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Crear Comentarios" id="s1" pass="1" fail="0" skip="0">Crear Comentarios</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

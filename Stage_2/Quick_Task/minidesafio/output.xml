@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.6 on win32)" generated="2025-10-03T20:24:35.354076" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\Users\admin\Documents\QAXpert\APIS\api_testing_robot_qax\minidesafio\test">
+<suite id="s1-s1" name="Minidesafio Test Post" source="C:\Users\admin\Documents\QAXpert\APIS\api_testing_robot_qax\minidesafio\test\minidesafio_test_post.robot">
+<test id="s1-s1-t1" name="Crear un nuevo post" line="6">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-03T20:24:35.698943" level="INFO">${body} = {'title': 'Mi primer post', 'body': 'Contenido de prueba', 'userId': '1'}</msg>
+<var>${body}</var>
+<arg>title=Mi primer post</arg>
+<arg>body=Contenido de prueba</arg>
+<arg>userId=1</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-03T20:24:35.697892" elapsed="0.001129"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-03T20:24:35.700468" level="FAIL">Variable '${BASE_URL}' not found.</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/posts</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="FAIL" start="2025-10-03T20:24:35.699445" elapsed="0.001109">Variable '${BASE_URL}' not found.</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-03T20:24:35.700920" elapsed="0.000043"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${resp.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-10-03T20:24:35.701281" elapsed="0.000044"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.701694" elapsed="0.000042"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Mi primer post</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-10-03T20:24:35.702110" elapsed="0.000040"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[body]</arg>
+<arg>Contenido de prueba</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-10-03T20:24:35.702553" elapsed="0.000060"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.json()}[userId]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-10-03T20:24:35.702988" elapsed="0.000048"/>
+</kw>
+<doc>Verifica que un POST a /posts cree un recurso y devuelva 201 con datos correctos.</doc>
+<status status="FAIL" start="2025-10-03T20:24:35.696042" elapsed="0.007543">Variable '${BASE_URL}' not found.</status>
+</test>
+<test id="s1-s1-t2" name="CP02 - Listar usuarios" line="19">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2025-10-03T20:24:35.706829" level="FAIL">Variable '${BASE_URL}' not found.</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/users</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<status status="FAIL" start="2025-10-03T20:24:35.705955" elapsed="0.000952">Variable '${BASE_URL}' not found.</status>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${users}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-10-03T20:24:35.707291" elapsed="0.000080"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.707962" elapsed="0.000078"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.708445" elapsed="0.000047"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.708869" elapsed="0.000044"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.709263" elapsed="0.000047"/>
+</kw>
+<doc>Verifica que un GET a /users devuelva lista no vacía con campos esperados.</doc>
+<status status="FAIL" start="2025-10-03T20:24:35.705202" elapsed="0.004584">Variable '${BASE_URL}' not found.</status>
+</test>
+<test id="s1-s1-t3" name="CP03 - Listar comentarios de un post" line="29">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2025-10-03T20:24:35.713957" level="FAIL">Variable '${BASE_URL}' not found.</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/comments</arg>
+<arg>params=postId=1</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<status status="FAIL" start="2025-10-03T20:24:35.712111" elapsed="0.002004">Variable '${BASE_URL}' not found.</status>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${comments}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-10-03T20:24:35.714712" elapsed="0.000063"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${comments[0]}</arg>
+<arg>id</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.715197" elapsed="0.000048"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${comments[0]}</arg>
+<arg>name</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.715627" elapsed="0.000047"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${comments[0]}</arg>
+<arg>email</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.716105" elapsed="0.000069"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${comments[0]}</arg>
+<arg>body</arg>
+<status status="NOT RUN" start="2025-10-03T20:24:35.716623" elapsed="0.000046"/>
+</kw>
+<doc>Verifica que un GET a /comments?postId=1 devuelva comentarios con campos esperados.</doc>
+<status status="FAIL" start="2025-10-03T20:24:35.710875" elapsed="0.006245">Variable '${BASE_URL}' not found.</status>
+</test>
+<test id="s1-s1-t4" name="G" line="37">
+<status status="FAIL" start="2025-10-03T20:24:35.718103" elapsed="0.000609">Test cannot be empty.</status>
+</test>
+<status status="FAIL" start="2025-10-03T20:24:35.435737" elapsed="0.284006"/>
+</suite>
+<status status="FAIL" start="2025-10-03T20:24:35.357508" elapsed="0.363541"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="4" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test" id="s1" pass="0" fail="4" skip="0">Test</stat>
+<stat name="Minidesafio Test Post" id="s1-s1" pass="0" fail="4" skip="0">Test.Minidesafio Test Post</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-10-03T20:24:35.440046" level="ERROR">Error in file 'C:\Users\admin\Documents\QAXpert\APIS\api_testing_robot_qax\minidesafio\test\minidesafio_test_post.robot' on line 2: Resource file 'minidesafio_api_variables.resource' does not exist.</msg>
+</errors>
+</robot>
