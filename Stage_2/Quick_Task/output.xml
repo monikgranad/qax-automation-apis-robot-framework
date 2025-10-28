@@ -1,0 +1,1386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.6 on win32)" generated="2025-10-03T21:10:01.108990" rpa="false" schemaversion="5">
+<suite id="s1" name="Test" source="C:\Users\admin\Documents\QAXpert\APIS\stage2\Minidesafio\test">
+<suite id="s1-s1" name="Minidesafio Test Post" source="C:\Users\admin\Documents\QAXpert\APIS\stage2\Minidesafio\test\minidesafio_test_post.robot">
+<test id="s1-s1-t1" name="Crear un nuevo post" line="9">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-10-03T21:10:01.535767" level="INFO">${body} = {'title': 'Mi primer post', 'body': 'Contenido de prueba', 'userId': '1'}</msg>
+<var>${body}</var>
+<arg>title=Mi primer post</arg>
+<arg>body=Contenido de prueba</arg>
+<arg>userId=1</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-10-03T21:10:01.534809" elapsed="0.001040"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2025-10-03T21:10:02.854254" level="INFO">POST Request : url=https://jsonplaceholder.typicode.com/posts 
+ path_url=/posts 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '73', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Mi primer post", "body": "Contenido de prueba", "userId": "1"}' 
+ </msg>
+<msg time="2025-10-03T21:10:02.854568" level="INFO">POST Response : url=https://jsonplaceholder.typicode.com/posts 
+ status=201, reason=Created 
+ headers={'Date': 'Sat, 04 Oct 2025 03:10:01 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '94', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'access-control-expose-headers': 'Location', 'Cache-Control': 'no-cache', 'etag': 'W/"5e-bP5Pb7muSe9EiaGPCjbjZ7w4Ahk"', 'expires': '-1', 'location': 'https://jsonplaceholder.typicode.com/posts/101', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=r%2FeCR%2BZN8ZpaCfd%2Fioyhi7%2F0afO5%2Bfquz5qt3xCnV48%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1759547401"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=r%2FeCR%2BZN8ZpaCfd%2Fioyhi7%2F0afO5%2Bfquz5qt3xCnV48%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1759547401"', 'Server': 'cloudflare', 'vary': 'Origin, X-HTTP-Method-Override, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '999', 'x-ratelimit-reset': '1759547412', 'cf-cache-status': 'DYNAMIC', 'CF-RAY': '98917bdddf7145e3-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body={
+  "title": "Mi primer post",
+  "body": "Contenido de prueba",
+  "userId": "1",
+  "id": 101
+} 
+ </msg>
+<msg time="2025-10-03T21:10:02.854882" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/posts</arg>
+<arg>json=${body}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2025-10-03T21:10:01.536299" elapsed="1.318653"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-03T21:10:02.857001" level="INFO">201</msg>
+<arg>${response.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.855672" elapsed="0.001466"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-10-03T21:10:02.859031" level="INFO">{'title': 'Mi primer post', 'body': 'Contenido de prueba', 'userId': '1', 'id': 101}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.857738" elapsed="0.001462"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${response.json()}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.859703" elapsed="0.001356"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[title]</arg>
+<arg>Mi primer post</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.861618" elapsed="0.001387"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${response.json()}[body]</arg>
+<arg>Contenido de prueba</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.863609" elapsed="0.001439"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${response.json()}[userId]</arg>
+<arg>1</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.865583" elapsed="0.001396"/>
+</kw>
+<doc>Verifica que un POST a /posts cree un recurso y devuelva 201 con datos correctos.</doc>
+<status status="PASS" start="2025-10-03T21:10:01.532666" elapsed="1.334905"/>
+</test>
+<test id="s1-s1-t2" name="CP02 - Listar usuarios" line="22">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2025-10-03T21:10:04.226184" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/users 
+ path_url=/users 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-03T21:10:04.226645" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/users 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 04 Oct 2025 03:10:03 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '1847', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'max-age=43200', 'Content-Encoding': 'gzip', 'etag': 'W/"160d-1eMSsxeJRfnVLRBmYJSbCiJZ1qQ"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=IHGcvWVQdORsqIwotNPdWYOuhsvsWjIWIfaVXdaj%2Bhc%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1758553454"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=IHGcvWVQdORsqIwotNPdWYOuhsvsWjIWIfaVXdaj%2Bhc%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1758553454"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '998', 'x-ratelimit-reset': '1758553473', 'Age': '26848', 'cf-cache-status': 'HIT', 'CF-RAY': '98917be6cb982cda-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body=[
+  {
+    "id": 1,
+    "name": "Leanne Graham",
+    "username": "Bret",
+    "email": "Sincere@april.biz",
+    "address": {
+      "street": "Kulas Light",
+      "suite": "Apt. 556",
+      "city": "Gwenborough",
+      "zipcode": "92998-3874",
+      "geo": {
+        "lat": "-37.3159",
+        "lng": "81.1496"
+      }
+    },
+    "phone": "1-770-736-8031 x56442",
+    "website": "hildegard.org",
+    "company": {
+      "name": "Romaguera-Crona",
+      "catchPhrase": "Multi-layered client-server neural-net",
+      "bs": "harness real-time e-markets"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Ervin Howell",
+    "username": "Antonette",
+    "email": "Shanna@melissa.tv",
+    "address": {
+      "street": "Victor Plains",
+      "suite": "Suite 879",
+      "city": "Wisokyburgh",
+      "zipcode": "90566-7771",
+      "geo": {
+        "lat": "-43.9509",
+        "lng": "-34.4618"
+      }
+    },
+    "phone": "010-692-6593 x09125",
+    "website": "anastasia.net",
+    "company": {
+      "name": "Deckow-Crist",
+      "catchPhrase": "Proactive didactic contingency",
+      "bs": "synergize scalable supply-chains"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Clementine Bauch",
+    "username": "Samantha",
+    "email": "Nathan@yesenia.net",
+    "address": {
+      "street": "Douglas Extension",
+      "suite": "Suite 847",
+      "city": "McKenziehaven",
+      "zipcode": "59590-4157",
+      "geo": {
+        "lat": "-68.6102",
+        "lng": "-47.0653"
+      }
+    },
+    "phone": "1-463-123-4447",
+    "website": "ramiro.info",
+    "company": {
+      "name": "Romaguera-Jacobson",
+      "catchPhrase": "Face to face bifurcated interface",
+      "bs": "e-enable strategic applications"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Patricia Lebsack",
+    "username": "Karianne",
+    "email": "Julianne.OConner@kory.org",
+    "address": {
+      "street": "Hoeger Mall",
+      "suite": "Apt. 692",
+      "city": "South Elvis",
+      "zipcode": "53919-4257",
+      "geo": {
+        "lat": "29.4572",
+        "lng": "-164.2990"
+      }
+    },
+    "phone": "493-170-9623 x156",
+    "website": "kale.biz",
+    "company": {
+      "name": "Robel-Corkery",
+      "catchPhrase": "Multi-tiered zero tolerance productivity",
+      "bs": "transition cutting-edge web services"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Chelsey Dietrich",
+    "username": "Kamren",
+    "email": "Lucio_Hettinger@annie.ca",
+    "address": {
+      "street": "Skiles Walks",
+      "suite": "Suite 351",
+      "city": "Roscoeview",
+      "zipcode": "33263",
+      "geo": {
+        "lat": "-31.8129",
+        "lng": "62.5342"
+      }
+    },
+    "phone": "(254)954-1289",
+    "website": "demarco.info",
+    "company": {
+      "name": "Keebler LLC",
+      "catchPhrase": "User-centric fault-tolerant solution",
+      "bs": "revolutionize end-to-end systems"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Mrs. Dennis Schulist",
+    "username": "Leopoldo_Corkery",
+    "email": "Karley_Dach@jasper.info",
+    "address": {
+      "street": "Norberto Crossing",
+      "suite": "Apt. 950",
+      "city": "South Christy",
+      "zipcode": "23505-1337",
+      "geo": {
+        "lat": "-71.4197",
+        "lng": "71.7478"
+      }
+    },
+    "phone": "1-477-935-8478 x6430",
+    "website": "ola.org",
+    "company": {
+      "name": "Considine-Lockman",
+      "catchPhrase": "Synchronised bottom-line interface",
+      "bs": "e-enable innovative applications"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Kurtis Weissnat",
+    "username": "Elwyn.Skiles",
+    "email": "Telly.Hoeger@billy.biz",
+    "address": {
+      "street": "Rex Trail",
+      "suite": "Suite 280",
+      "city": "Howemouth",
+      "zipcode": "58804-1099",
+      "geo": {
+        "lat": "24.8918",
+        "lng": "21.8984"
+      }
+    },
+    "phone": "210.067.6132",
+    "website": "elvis.io",
+    "company": {
+      "name": "Johns Group",
+      "catchPhrase": "Configurable multimedia task-force",
+      "bs": "generate enterprise e-tailers"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Nicholas Runolfsdottir V",
+    "username": "Maxime_Nienow",
+    "email": "Sherwood@rosamond.me",
+    "address": {
+      "street": "Ellsworth Summit",
+      "suite": "Suite 729",
+      "city": "Aliyaview",
+      "zipcode": "45169",
+      "geo": {
+        "lat": "-14.3990",
+        "lng": "-120.7677"
+      }
+    },
+    "phone": "586.493.6943 x140",
+    "website": "jacynthe.com",
+    "company": {
+      "name": "Abernathy Group",
+      "catchPhrase": "Implemented secondary concept",
+      "bs": "e-enable extensible e-tailers"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Glenna Reichert",
+    "username": "Delphine",
+    "email": "Chaim_McDermott@dana.io",
+    "address": {
+      "street": "Dayna Park",
+      "suite": "Suite 449",
+      "city": "Bartholomebury",
+      "zipcode": "76495-3109",
+      "geo": {
+        "lat": "24.6463",
+        "lng": "-168.8889"
+      }
+    },
+    "phone": "(775)976-6794 x41206",
+    "website": "conrad.com",
+    "company": {
+      "name": "Yost and Sons",
+      "catchPhrase": "Switchable contextually-based project",
+      "bs": "aggregate real-time technologies"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Clementina DuBuque",
+    "username": "Moriah.Stanton",
+    "email": "Rey.Padberg@karina.biz",
+    "address": {
+      "street": "Kattie Turnpike",
+      "suite": "Suite 198",
+      "city": "Lebsackbury",
+      "zipcode": "31428-2261",
+      "geo": {
+        "lat": "-38.2386",
+        "lng": "57.2232"
+      }
+    },
+    "phone": "024-648-3804",
+    "website": "ambrose.net",
+    "company": {
+      "name": "Hoeger LLC",
+      "catchPhrase": "Centralized empowering task-force",
+      "bs": "target end-to-end models"
+    }
+  }
+] 
+ </msg>
+<msg time="2025-10-03T21:10:04.227901" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/users</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.870469" elapsed="1.357566"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-03T21:10:04.230916" level="INFO">${users} = [{'id': 1, 'name': 'Leanne Graham', 'username': 'Bret', 'email': 'Sincere@april.biz', 'address': {'street': 'Kulas Light', 'suite': 'Apt. 556', 'city': 'Gwenborough', 'zipcode': '92998-3874', 'geo': {...</msg>
+<var>${users}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.228993" elapsed="0.001993"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.232459" level="INFO">${id} = 1</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.232068" elapsed="0.000472"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.233162" level="INFO">${name} = Leanne Graham</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.232807" elapsed="0.000409"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.233843" level="INFO">${username} = Bret</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.233428" elapsed="0.000472"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.234463" level="INFO">${email} = Sincere@april.biz</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.234121" elapsed="0.000403"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.234777" elapsed="0.001421"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.236453" elapsed="0.001511"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.238229" elapsed="0.001059"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.239479" elapsed="0.001513"/>
+</kw>
+<var name="${item}">{'id': 1, 'name': 'Leanne Graham', 'username': 'Bret', 'email': 'Sincere@april.biz', 'address': {'street': 'Kulas Light', 'suite': 'Apt. 556', 'city': 'Gwenborough', 'zipcode': '92998-3874', 'geo': {'...</var>
+<status status="PASS" start="2025-10-03T21:10:04.231838" elapsed="0.009296"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.242900" level="INFO">${id} = 2</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.242327" elapsed="0.000635"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.243474" level="INFO">${name} = Ervin Howell</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.243176" elapsed="0.000350"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.243986" level="INFO">${username} = Antonette</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.243712" elapsed="0.000319"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.244493" level="INFO">${email} = Shanna@melissa.tv</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.244207" elapsed="0.000332"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.244714" elapsed="0.000890"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.245805" elapsed="0.000851"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.246863" elapsed="0.001077"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.248189" elapsed="0.001256"/>
+</kw>
+<var name="${item}">{'id': 2, 'name': 'Ervin Howell', 'username': 'Antonette', 'email': 'Shanna@melissa.tv', 'address': {'street': 'Victor Plains', 'suite': 'Suite 879', 'city': 'Wisokyburgh', 'zipcode': '90566-7771', 'g...</var>
+<status status="PASS" start="2025-10-03T21:10:04.241914" elapsed="0.007638"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.250449" level="INFO">${id} = 3</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.250101" elapsed="0.000405"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.251024" level="INFO">${name} = Clementine Bauch</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.250721" elapsed="0.000355"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.255585" level="INFO">${username} = Samantha</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.251284" elapsed="0.004372"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.256195" level="INFO">${email} = Nathan@yesenia.net</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.255899" elapsed="0.000344"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.256417" elapsed="0.000849"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.257449" elapsed="0.001678"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.259504" elapsed="0.001578"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.261361" elapsed="0.000988"/>
+</kw>
+<var name="${item}">{'id': 3, 'name': 'Clementine Bauch', 'username': 'Samantha', 'email': 'Nathan@yesenia.net', 'address': {'street': 'Douglas Extension', 'suite': 'Suite 847', 'city': 'McKenziehaven', 'zipcode': '59590...</var>
+<status status="PASS" start="2025-10-03T21:10:04.249888" elapsed="0.012560"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.263335" level="INFO">${id} = 4</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.262932" elapsed="0.000464"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.263970" level="INFO">${name} = Patricia Lebsack</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.263640" elapsed="0.000386"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.264571" level="INFO">${username} = Karianne</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.264248" elapsed="0.000377"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.265151" level="INFO">${email} = Julianne.OConner@kory.org</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.264842" elapsed="0.000362"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.265418" elapsed="0.001163"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.266801" elapsed="0.001137"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.268154" elapsed="0.001130"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.269499" elapsed="0.001181"/>
+</kw>
+<var name="${item}">{'id': 4, 'name': 'Patricia Lebsack', 'username': 'Karianne', 'email': 'Julianne.OConner@kory.org', 'address': {'street': 'Hoeger Mall', 'suite': 'Apt. 692', 'city': 'South Elvis', 'zipcode': '53919-4...</var>
+<status status="PASS" start="2025-10-03T21:10:04.262734" elapsed="0.008043"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.271732" level="INFO">${id} = 5</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.271233" elapsed="0.000587"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.272785" level="INFO">${name} = Chelsey Dietrich</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.272153" elapsed="0.000810"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.273731" level="INFO">${username} = Kamren</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.273358" elapsed="0.000436"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.274318" level="INFO">${email} = Lucio_Hettinger@annie.ca</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.274012" elapsed="0.000359"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.274588" elapsed="0.001163"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.275963" elapsed="0.001113"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.277285" elapsed="0.001106"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.278607" elapsed="0.001111"/>
+</kw>
+<var name="${item}">{'id': 5, 'name': 'Chelsey Dietrich', 'username': 'Kamren', 'email': 'Lucio_Hettinger@annie.ca', 'address': {'street': 'Skiles Walks', 'suite': 'Suite 351', 'city': 'Roscoeview', 'zipcode': '33263', '...</var>
+<status status="PASS" start="2025-10-03T21:10:04.271068" elapsed="0.008740"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.280612" level="INFO">${id} = 6</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.280279" elapsed="0.000389"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.281183" level="INFO">${name} = Mrs. Dennis Schulist</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.280884" elapsed="0.000352"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.281821" level="INFO">${username} = Leopoldo_Corkery</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.281440" elapsed="0.000435"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.282377" level="INFO">${email} = Karley_Dach@jasper.info</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.282080" elapsed="0.000350"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.282642" elapsed="0.001127"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.284083" elapsed="0.001118"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.285413" elapsed="0.001103"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.286730" elapsed="0.001105"/>
+</kw>
+<var name="${item}">{'id': 6, 'name': 'Mrs. Dennis Schulist', 'username': 'Leopoldo_Corkery', 'email': 'Karley_Dach@jasper.info', 'address': {'street': 'Norberto Crossing', 'suite': 'Apt. 950', 'city': 'South Christy', '...</var>
+<status status="PASS" start="2025-10-03T21:10:04.280117" elapsed="0.007808"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.288863" level="INFO">${id} = 7</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.288469" elapsed="0.000496"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.290133" level="INFO">${name} = Kurtis Weissnat</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.289678" elapsed="0.000528"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.290853" level="INFO">${username} = Elwyn.Skiles</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.290512" elapsed="0.000395"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.291548" level="INFO">${email} = Telly.Hoeger@billy.biz</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.291126" elapsed="0.000515"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.291912" elapsed="0.000895"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.292997" elapsed="0.000829"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.294014" elapsed="0.000808"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.295016" elapsed="0.000859"/>
+</kw>
+<var name="${item}">{'id': 7, 'name': 'Kurtis Weissnat', 'username': 'Elwyn.Skiles', 'email': 'Telly.Hoeger@billy.biz', 'address': {'street': 'Rex Trail', 'suite': 'Suite 280', 'city': 'Howemouth', 'zipcode': '58804-1099...</var>
+<status status="PASS" start="2025-10-03T21:10:04.288300" elapsed="0.007667"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.296740" level="INFO">${id} = 8</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.296419" elapsed="0.000387"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.297319" level="INFO">${name} = Nicholas Runolfsdottir V</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.297016" elapsed="0.000356"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.297900" level="INFO">${username} = Maxime_Nienow</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.297587" elapsed="0.000365"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.298469" level="INFO">${email} = Sherwood@rosamond.me</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.298161" elapsed="0.000366"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.298737" elapsed="0.001119"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.300068" elapsed="0.001155"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.301443" elapsed="0.001119"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.302776" elapsed="0.001122"/>
+</kw>
+<var name="${item}">{'id': 8, 'name': 'Nicholas Runolfsdottir V', 'username': 'Maxime_Nienow', 'email': 'Sherwood@rosamond.me', 'address': {'street': 'Ellsworth Summit', 'suite': 'Suite 729', 'city': 'Aliyaview', 'zipcod...</var>
+<status status="PASS" start="2025-10-03T21:10:04.296257" elapsed="0.007730"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.305114" level="INFO">${id} = 9</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.304436" elapsed="0.000779"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.305890" level="INFO">${name} = Glenna Reichert</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.305569" elapsed="0.000368"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.306380" level="INFO">${username} = Delphine</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.306110" elapsed="0.000316"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.306878" level="INFO">${email} = Chaim_McDermott@dana.io</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.306610" elapsed="0.000313"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.307275" elapsed="0.000840"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.308297" elapsed="0.000807"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.309284" elapsed="0.000801"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.310264" elapsed="0.000813"/>
+</kw>
+<var name="${item}">{'id': 9, 'name': 'Glenna Reichert', 'username': 'Delphine', 'email': 'Chaim_McDermott@dana.io', 'address': {'street': 'Dayna Park', 'suite': 'Suite 449', 'city': 'Bartholomebury', 'zipcode': '76495-3...</var>
+<status status="PASS" start="2025-10-03T21:10:04.304276" elapsed="0.006882"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.311822" level="INFO">${id} = 10</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.311540" elapsed="0.000340"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.312325" level="INFO">${name} = Clementina DuBuque</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.312053" elapsed="0.000318"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.312809" level="INFO">${username} = Moriah.Stanton</msg>
+<var>${username}</var>
+<arg>${item}</arg>
+<arg>username</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.312546" elapsed="0.000307"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:04.313291" level="INFO">${email} = Rey.Padberg@karina.biz</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.313025" elapsed="0.000311"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.313501" elapsed="0.000796"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.314477" elapsed="0.000806"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.315461" elapsed="0.000816"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${users[0]}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.316462" elapsed="0.000794"/>
+</kw>
+<var name="${item}">{'id': 10, 'name': 'Clementina DuBuque', 'username': 'Moriah.Stanton', 'email': 'Rey.Padberg@karina.biz', 'address': {'street': 'Kattie Turnpike', 'suite': 'Suite 198', 'city': 'Lebsackbury', 'zipcode...</var>
+<status status="PASS" start="2025-10-03T21:10:04.311394" elapsed="0.005938"/>
+</iter>
+<var>${item}</var>
+<value>@{users}</value>
+<status status="PASS" start="2025-10-03T21:10:04.231330" elapsed="0.086065"/>
+</for>
+<doc>Verifica que un GET a /users devuelva lista no vacía con campos esperados.</doc>
+<status status="PASS" start="2025-10-03T21:10:02.869278" elapsed="1.448642"/>
+</test>
+<test id="s1-s1-t3" name="CP03 - Listar comentarios de un post" line="43">
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2025-10-03T21:10:05.317950" level="INFO">GET Request : url=https://jsonplaceholder.typicode.com/comments?postId=2 
+ path_url=/comments?postId=2 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-10-03T21:10:05.318237" level="INFO">GET Response : url=https://jsonplaceholder.typicode.com/comments?postId=2 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 04 Oct 2025 03:10:04 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'access-control-allow-credentials': 'true', 'Cache-Control': 'max-age=43200', 'Content-Encoding': 'gzip', 'etag': 'W/"5fe-SNRxXTWeTmW/Q4d2qiV3mieyWj8"', 'expires': '-1', 'nel': '{"report_to":"heroku-nel","response_headers":["Via"],"max_age":3600,"success_fraction":0.01,"failure_fraction":0.1}', 'pragma': 'no-cache', 'report-to': '{"group":"heroku-nel","endpoints":[{"url":"https://nel.heroku.com/reports?s=KrXP6OQUeYDzezPssaFHWn6hBIpuoDKM%2F4XfW25Y7So%3D\\u0026sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d\\u0026ts=1759381338"}],"max_age":3600}', 'reporting-endpoints': 'heroku-nel="https://nel.heroku.com/reports?s=KrXP6OQUeYDzezPssaFHWn6hBIpuoDKM%2F4XfW25Y7So%3D&amp;sid=e11707d5-02a7-43ef-b45e-2cf4d2036f7d&amp;ts=1759381338"', 'Server': 'cloudflare', 'vary': 'Origin, Accept-Encoding', 'via': '2.0 heroku-router', 'x-content-type-options': 'nosniff', 'x-powered-by': 'Express', 'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': '999', 'x-ratelimit-reset': '1759381358', 'Age': '963', 'cf-cache-status': 'HIT', 'CF-RAY': '98917bed98a4a571-DFW', 'alt-svc': 'h3=":443"; ma=86400'} 
+ body=[
+  {
+    "postId": 2,
+    "id": 6,
+    "name": "et fugit eligendi deleniti quidem qui sint nihil autem",
+    "email": "Presley.Mueller@myrl.com",
+    "body": "doloribus at sed quis culpa deserunt consectetur qui praesentium\naccusamus fugiat dicta\nvoluptatem rerum ut voluptate autem\nvoluptatem repellendus aspernatur dolorem in"
+  },
+  {
+    "postId": 2,
+    "id": 7,
+    "name": "repellat consequatur praesentium vel minus molestias voluptatum",
+    "email": "Dallas@ole.me",
+    "body": "maiores sed dolores similique labore et inventore et\nquasi temporibus esse sunt id et\neos voluptatem aliquam\naliquid ratione corporis molestiae mollitia quia et magnam dolor"
+  },
+  {
+    "postId": 2,
+    "id": 8,
+    "name": "et omnis dolorem",
+    "email": "Mallory_Kunze@marie.org",
+    "body": "ut voluptatem corrupti velit\nad voluptatem maiores\net nisi velit vero accusamus maiores\nvoluptates quia aliquid ullam eaque"
+  },
+  {
+    "postId": 2,
+    "id": 9,
+    "name": "provident id voluptas",
+    "email": "Meghan_Littel@rene.us",
+    "body": "sapiente assumenda molestiae atque\nadipisci laborum distinctio aperiam et ab ut omnis\net occaecati aspernatur odit sit rem expedita\nquas enim ipsam minus"
+  },
+  {
+    "postId": 2,
+    "id": 10,
+    "name": "eaque et deleniti atque tenetur ut quo ut",
+    "email": "Carmen_Keeling@caroline.name",
+    "body": "voluptate iusto quis nobis reprehenderit ipsum amet nulla\nquia quas dolores velit et non\naut quia necessitatibus\nnostrum quaerat nulla et accusamus nisi facilis"
+  }
+] 
+ </msg>
+<msg time="2025-10-03T21:10:05.318609" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/comments</arg>
+<arg>params=postId=2</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.319906" elapsed="0.998782"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-10-03T21:10:05.322099" level="INFO">${comments} = [{'postId': 2, 'id': 6, 'name': 'et fugit eligendi deleniti quidem qui sint nihil autem', 'email': 'Presley.Mueller@myrl.com', 'body': 'doloribus at sed quis culpa deserunt consectetur qui praesentium...</msg>
+<var>${comments}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.319845" elapsed="0.002394"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.324317" level="INFO">${postId} = 2</msg>
+<var>${postId}</var>
+<arg>${item}</arg>
+<arg>postId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.323812" elapsed="0.000614"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.325294" level="INFO">${id} = 6</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.324797" elapsed="0.000595"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.326185" level="INFO">${name} = et fugit eligendi deleniti quidem qui sint nihil autem</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.325741" elapsed="0.000557"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.327131" level="INFO">${email} = Presley.Mueller@myrl.com</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.326627" elapsed="0.000616"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.328017" level="INFO">${body} = doloribus at sed quis culpa deserunt consectetur qui praesentium
+accusamus fugiat dicta
+voluptatem rerum ut voluptate autem
+voluptatem repellendus aspernatur dolorem in</msg>
+<var>${body}</var>
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.327567" elapsed="0.000533"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.328402" elapsed="0.000371"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.329054" elapsed="0.000394"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.329858" elapsed="0.000486"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.330629" elapsed="0.000347"/>
+</kw>
+<var name="${item}">{'postId': 2, 'id': 6, 'name': 'et fugit eligendi deleniti quidem qui sint nihil autem', 'email': 'Presley.Mueller@myrl.com', 'body': 'doloribus at sed quis culpa deserunt consectetur qui praesentium\...</var>
+<status status="PASS" start="2025-10-03T21:10:05.323488" elapsed="0.007667"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.332196" level="INFO">${postId} = 2</msg>
+<var>${postId}</var>
+<arg>${item}</arg>
+<arg>postId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.331775" elapsed="0.000495"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.332963" level="INFO">${id} = 7</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.332558" elapsed="0.000475"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.333712" level="INFO">${name} = repellat consequatur praesentium vel minus molestias voluptatum</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.333307" elapsed="0.000474"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.334479" level="INFO">${email} = Dallas@ole.me</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.334056" elapsed="0.000492"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.335246" level="INFO">${body} = maiores sed dolores similique labore et inventore et
+quasi temporibus esse sunt id et
+eos voluptatem aliquam
+aliquid ratione corporis molestiae mollitia quia et magnam dolor</msg>
+<var>${body}</var>
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.334823" elapsed="0.000500"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.335604" elapsed="0.000353"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.336221" elapsed="0.000605"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.337149" elapsed="0.000349"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.337723" elapsed="0.000491"/>
+</kw>
+<var name="${item}">{'postId': 2, 'id': 7, 'name': 'repellat consequatur praesentium vel minus molestias voluptatum', 'email': 'Dallas@ole.me', 'body': 'maiores sed dolores similique labore et inventore et\nquasi tempori...</var>
+<status status="PASS" start="2025-10-03T21:10:05.331565" elapsed="0.006806"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.339304" level="INFO">${postId} = 2</msg>
+<var>${postId}</var>
+<arg>${item}</arg>
+<arg>postId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.338905" elapsed="0.000478"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.340001" level="INFO">${id} = 8</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.339619" elapsed="0.000508"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.340807" level="INFO">${name} = et omnis dolorem</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.340426" elapsed="0.000443"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.341620" level="INFO">${email} = Mallory_Kunze@marie.org</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.341231" elapsed="0.000450"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.342278" level="INFO">${body} = ut voluptatem corrupti velit
+ad voluptatem maiores
+et nisi velit vero accusamus maiores
+voluptates quia aliquid ullam eaque</msg>
+<var>${body}</var>
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.341913" elapsed="0.000437"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.342577" elapsed="0.000301"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.343100" elapsed="0.000309"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.343633" elapsed="0.000301"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.344156" elapsed="0.000317"/>
+</kw>
+<var name="${item}">{'postId': 2, 'id': 8, 'name': 'et omnis dolorem', 'email': 'Mallory_Kunze@marie.org', 'body': 'ut voluptatem corrupti velit\nad voluptatem maiores\net nisi velit vero accusamus maiores\nvoluptates qu...</var>
+<status status="PASS" start="2025-10-03T21:10:05.338711" elapsed="0.005853"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.345412" level="INFO">${postId} = 2</msg>
+<var>${postId}</var>
+<arg>${item}</arg>
+<arg>postId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.345039" elapsed="0.000437"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.346082" level="INFO">${id} = 9</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.345709" elapsed="0.000435"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.346949" level="INFO">${name} = provident id voluptas</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.346456" elapsed="0.000569"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.347667" level="INFO">${email} = Meghan_Littel@rene.us</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.347303" elapsed="0.000430"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.348311" level="INFO">${body} = sapiente assumenda molestiae atque
+adipisci laborum distinctio aperiam et ab ut omnis
+et occaecati aspernatur odit sit rem expedita
+quas enim ipsam minus</msg>
+<var>${body}</var>
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.347959" elapsed="0.000424"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.348607" elapsed="0.001109"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.349956" elapsed="0.000419"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.350581" elapsed="0.000252"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.351027" elapsed="0.000249"/>
+</kw>
+<var name="${item}">{'postId': 2, 'id': 9, 'name': 'provident id voluptas', 'email': 'Meghan_Littel@rene.us', 'body': 'sapiente assumenda molestiae atque\nadipisci laborum distinctio aperiam et ab ut omnis\net occaecati ...</var>
+<status status="PASS" start="2025-10-03T21:10:05.344863" elapsed="0.006501"/>
+</iter>
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.352095" level="INFO">${postId} = 2</msg>
+<var>${postId}</var>
+<arg>${item}</arg>
+<arg>postId</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.351792" elapsed="0.000355"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.352848" level="INFO">${id} = 10</msg>
+<var>${id}</var>
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.352421" elapsed="0.000492"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.353635" level="INFO">${name} = eaque et deleniti atque tenetur ut quo ut</msg>
+<var>${name}</var>
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.353241" elapsed="0.000453"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.354283" level="INFO">${email} = Carmen_Keeling@caroline.name</msg>
+<var>${email}</var>
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.353939" elapsed="0.000413"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-10-03T21:10:05.355487" level="INFO">${body} = voluptate iusto quis nobis reprehenderit ipsum amet nulla
+quia quas dolores velit et non
+aut quia necessitatibus
+nostrum quaerat nulla et accusamus nisi facilis</msg>
+<var>${body}</var>
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.354789" elapsed="0.000891"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.356086" elapsed="0.000515"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>name</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.356933" elapsed="0.000447"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>email</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.357698" elapsed="0.000584"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>body</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-10-03T21:10:05.358612" elapsed="0.000430"/>
+</kw>
+<var name="${item}">{'postId': 2, 'id': 10, 'name': 'eaque et deleniti atque tenetur ut quo ut', 'email': 'Carmen_Keeling@caroline.name', 'body': 'voluptate iusto quis nobis reprehenderit ipsum amet nulla\nquia quas dolo...</var>
+<status status="PASS" start="2025-10-03T21:10:05.351641" elapsed="0.007505"/>
+</iter>
+<var>${item}</var>
+<value>@{comments}</value>
+<status status="PASS" start="2025-10-03T21:10:05.322764" elapsed="0.036461"/>
+</for>
+<doc>Verifica que un GET a /comments?postId=1 devuelva comentarios con campos esperados.</doc>
+<status status="PASS" start="2025-10-03T21:10:04.318865" elapsed="1.040823"/>
+</test>
+<status status="PASS" start="2025-10-03T21:10:01.193334" elapsed="4.167740"/>
+</suite>
+<status status="PASS" start="2025-10-03T21:10:01.113138" elapsed="4.249657"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test" id="s1" pass="3" fail="0" skip="0">Test</stat>
+<stat name="Minidesafio Test Post" id="s1-s1" pass="3" fail="0" skip="0">Test.Minidesafio Test Post</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
